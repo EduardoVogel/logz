@@ -1,6 +1,6 @@
 from PyQt6 import uic
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QCheckBox, QLabel, QLineEdit, QMessageBox
-
+import Excel_Pandas
 global key_login, contator_login
 
 contator_login = 0
@@ -139,8 +139,6 @@ class UI(QMainWindow):
         self.button_Number8.hide()
         self.button_Number9.hide()
         self.button_Number0.hide()
-        self.button_Next.hide()
-        self.button_Previous.hide()
 
     #mostra itens após login
     def show_unhid(self):
@@ -175,6 +173,7 @@ class UI(QMainWindow):
         self.button_Show.show()
         self.button_Next.show()
         self.button_Previous.show()
+        Excel_Pandas.modificar_banco()
 
     #esconde itens se não estiver logado
     def hide_unhid(self):
