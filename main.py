@@ -1,5 +1,5 @@
-from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QCheckBox, QLabel, QLineEdit, QMessageBox
+from PyQt6 import uic
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QCheckBox, QLabel, QLineEdit, QMessageBox
 
 global key_login, contator_login
 
