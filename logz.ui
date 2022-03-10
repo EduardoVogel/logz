@@ -507,19 +507,6 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="Logar">
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>215</y>
-      <width>81</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Logar</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Number_0">
     <property name="geometry">
      <rect>
@@ -710,6 +697,45 @@
      <string>8</string>
     </property>
    </widget>
+   <widget class="QLabel" name="imagem_User_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>200</width>
+      <height>200</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>Imagem/User.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="user_logado">
+    <property name="geometry">
+     <rect>
+      <x>18</x>
+      <y>70</y>
+      <width>49</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>imagem_User_2</zorder>
    <zorder>Check_Broca3</zorder>
    <zorder>Broca3</zorder>
    <zorder>Check_Broca4</zorder>
@@ -725,7 +751,6 @@
    <zorder>Next</zorder>
    <zorder>Previous</zorder>
    <zorder>imagem_Logo</zorder>
-   <zorder>Logar</zorder>
    <zorder>Number_0</zorder>
    <zorder>imagem_User</zorder>
    <zorder>lineEdit_Login</zorder>
@@ -738,6 +763,7 @@
    <zorder>Number_7</zorder>
    <zorder>Number_2</zorder>
    <zorder>Number_8</zorder>
+   <zorder>user_logado</zorder>
   </widget>
  </widget>
  <resources/>

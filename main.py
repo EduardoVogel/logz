@@ -1,9 +1,10 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QCheckBox, QLabel, QLineEdit, QMessageBox
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QCheckBox, QLabel, QLineEdit
 import Excel_Pandas
-global key_login, contator_login
+global key_login, cont_login, user
 
-contator_login = 0
+user = ''
+cont_login = 0
 key_login = [0,0,0,0]
 
 class UI(QMainWindow):
@@ -27,24 +28,25 @@ class UI(QMainWindow):
         self.button_Number8 = self.findChild(QPushButton, "Number_8")
         self.button_Number9 = self.findChild(QPushButton, "Number_9")
         self.button_Number0 = self.findChild(QPushButton, "Number_0")
-        self.button_Login   = self.findChild(QPushButton, "Logar")
 
         self.lineEdit_Login = self.findChild(QLineEdit, "lineEdit_Login")
 
         #imagens
-        self.image_Broca1 = self.findChild(QLabel, "Broca1")
-        self.image_Broca2 = self.findChild(QLabel, "Broca2")
-        self.image_Broca3 = self.findChild(QLabel, "Broca3")
-        self.image_Broca4 = self.findChild(QLabel, "Broca4")
-        self.image_Broca5 = self.findChild(QLabel, "Broca5")
-        self.imagem_User = self.findChild(QLabel, "imagem_User")
+        self.image_1 = self.findChild(QLabel, "Broca1")
+        self.image_2 = self.findChild(QLabel, "Broca2")
+        self.image_3 = self.findChild(QLabel, "Broca3")
+        self.image_4 = self.findChild(QLabel, "Broca4")
+        self.image_5 = self.findChild(QLabel, "Broca5")
+        self.image_User = self.findChild(QLabel, "imagem_User")
+        self.image_User_2 = self.findChild(QLabel, "imagem_User_2")
+        self.user_logado = self.findChild(QLabel, "user_logado")
 
         #check box
-        self.Check_Broca1 = self.findChild(QCheckBox, "Check_Broca1")
-        self.Check_Broca2 = self.findChild(QCheckBox, "Check_Broca2")
-        self.Check_Broca3 = self.findChild(QCheckBox, "Check_Broca3")
-        self.Check_Broca4 = self.findChild(QCheckBox, "Check_Broca4")
-        self.Check_Broca5 = self.findChild(QCheckBox, "Check_Broca5")
+        self.Check_1 = self.findChild(QCheckBox, "Check_Broca1")
+        self.Check_2 = self.findChild(QCheckBox, "Check_Broca2")
+        self.Check_3 = self.findChild(QCheckBox, "Check_Broca3")
+        self.Check_4 = self.findChild(QCheckBox, "Check_Broca4")
+        self.Check_5 = self.findChild(QCheckBox, "Check_Broca5")
 
         # clicar no botao
         self.button_Hide.clicked.connect(self.hide_unhid)
@@ -59,75 +61,62 @@ class UI(QMainWindow):
         self.button_Number8.clicked.connect(self.key_User)
         self.button_Number9.clicked.connect(self.key_User)
         self.button_Number0.clicked.connect(self.key_User)
-        self.button_Login.clicked.connect(self.Confirm_key)
 
         self.show()
 
     #recebe a senha do usuario e armazena
     def key_User(self):
 
-        global contator_login, var
+        global cont_login, var, user
         sender = self.sender()
-        soma = contator_login
+        soma = cont_login
 
-        if contator_login < 4:
+        if cont_login < 4:
             if sender.text() == '1':
-                key_login[contator_login] = 1
+                key_login[cont_login] = 1
             elif sender.text() == '2':
-                key_login[contator_login] = 2
+                key_login[cont_login] = 2
             elif sender.text() == '3':
-                key_login[contator_login] = 3
+                key_login[cont_login] = 3
             elif sender.text() == '4':
-                key_login[contator_login] = 4
+                key_login[cont_login] = 4
             elif sender.text() == '5':
-                key_login[contator_login] = 5
+                key_login[cont_login] = 5
             elif sender.text() == '6':
-                key_login[contator_login] = 6
+                key_login[cont_login] = 6
             elif sender.text() == '7':
-                key_login[contator_login] = 7
+                key_login[cont_login] = 7
             elif sender.text() == '8':
-                key_login[contator_login] = 8
+                key_login[cont_login] = 8
             elif sender.text() == '9':
-                key_login[contator_login] = 9
+                key_login[cont_login] = 9
             elif sender.text() == '0':
-                key_login[contator_login] = 0
+                key_login[cont_login] = 0
 
-            contator_login = soma + 1
-            var = self.lineEdit_Login.text()
-            self.lineEdit_Login.setText(var + "*")
-        else:
-            contator_login = 0
-            self.show_Popup()
+        cont_login = soma + 1
+        var = self.lineEdit_Login.text()
+        self.lineEdit_Login.setText(var + "*")
+
+        if (key_login[0] == 1 and key_login[1] == 2 and key_login[2] == 3 and key_login[3] == 4) and cont_login == 4:
+            user = "admin"
+            self.user_logado.setText(user)
+            self.user_logado.setStyleSheet("color:#ffffff;")
+            print(key_login, cont_login, user)
+            self.show_unhid()
+            self.hide_login()
+
+        if cont_login >= 4:
+            cont_login = 0
             self.lineEdit_Login.setText("")
             key_login[0] = 0
             key_login[1] = 0
             key_login[2] = 0
             key_login[3] = 0
-        print(key_login, contator_login)
-
-    #popUp para quando der mais de 4 caracteres
-    def show_Popup(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("Erro login")
-        msg.setText("Limite de caracteres atingido!!!")
-        print("Limite de caracteres atingido!!!")
-        x = msg.exec()
-
-    #confirma o login
-    def Confirm_key(self):
-        if key_login[0] == 1 and key_login[1] == 2 and key_login[2] == 3 and key_login[3] == 4:
-            msg = QMessageBox()
-            msg.setWindowTitle("Login")
-            msg.setText("Login Realizado com sucesso!")
-            print("Login realizado")
-            x = msg.exec()
-            self.show_unhid()
-            self.hide_login()
+        print(key_login, cont_login, user)
 
     #esconde login após logar
     def hide_login(self):
-        self.button_Login.hide()
-        self.imagem_User.hide()
+        self.image_User.hide()
         self.lineEdit_Login.hide()
         self.button_Number1.hide()
         self.button_Number2.hide()
@@ -142,51 +131,57 @@ class UI(QMainWindow):
 
     #mostra itens após login
     def show_unhid(self):
-        self.image_Broca1.raise_()
-        self.image_Broca2.raise_()
-        self.image_Broca3.raise_()
-        self.image_Broca4.raise_()
-        self.image_Broca5.raise_()
-        self.Check_Broca1.raise_()
-        self.Check_Broca2.raise_()
-        self.Check_Broca3.raise_()
-        self.Check_Broca4.raise_()
-        self.Check_Broca5.raise_()
+        self.image_1.raise_()
+        self.image_2.raise_()
+        self.image_3.raise_()
+        self.image_4.raise_()
+        self.image_5.raise_()
+        self.Check_1.raise_()
+        self.Check_2.raise_()
+        self.Check_3.raise_()
+        self.Check_4.raise_()
+        self.Check_5.raise_()
         self.button_Hide.raise_()
         self.button_Show.raise_()
         self.button_Next.raise_()
         self.button_Previous.raise_()
+        self.image_User_2.raise_()
+        self.user_logado.show()
 
     #mostra itens após login
     def mostrar(self):
-        self.image_Broca1.show()
-        self.image_Broca2.show()
-        self.image_Broca3.show()
-        self.image_Broca4.show()
-        self.image_Broca5.show()
-        self.Check_Broca1.show()
-        self.Check_Broca2.show()
-        self.Check_Broca3.show()
-        self.Check_Broca4.show()
-        self.Check_Broca5.show()
+        self.image_1.show()
+        self.image_2.show()
+        self.image_3.show()
+        self.image_4.show()
+        self.image_5.show()
+        self.Check_1.show()
+        self.Check_2.show()
+        self.Check_3.show()
+        self.Check_4.show()
+        self.Check_5.show()
         self.button_Hide.show()
         self.button_Show.show()
         self.button_Next.show()
         self.button_Previous.show()
+        self.user_logado.show()
+        self.image_User_2.show()
         Excel_Pandas.modificar_banco()
 
     #esconde itens se não estiver logado
     def hide_unhid(self):
-        self.image_Broca1.hide()
-        self.image_Broca2.hide()
-        self.image_Broca3.hide()
-        self.image_Broca4.hide()
-        self.image_Broca5.hide()
-        self.Check_Broca1.hide()
-        self.Check_Broca2.hide()
-        self.Check_Broca3.hide()
-        self.Check_Broca4.hide()
-        self.Check_Broca5.hide()
+        self.image_1.hide()
+        self.image_2.hide()
+        self.image_3.hide()
+        self.image_4.hide()
+        self.image_5.hide()
+        self.Check_1.hide()
+        self.Check_2.hide()
+        self.Check_3.hide()
+        self.Check_4.hide()
+        self.Check_5.hide()
+        self.image_User_2.hide()
+        self.user_logado.hide()
 
 
 app = QApplication([])
